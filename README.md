@@ -15,3 +15,8 @@ Create an application that generates a pdf of new articles summarized, with a QR
 
 ## Deployment 
 Deployment will be done via Heroku https://www.heroku.com/
+
+
+
+### Other Misc stuff
+Package Manager : pipenv https://pipenv.readthedocs.io/en/latest/
