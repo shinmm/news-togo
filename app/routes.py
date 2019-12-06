@@ -1,8 +1,8 @@
 from app import app,db, bcrypt
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, current_app
 from flask_login import login_user, current_user, logout_user, login_required
 from app.models import User
-from app.forms import LoginForm
+from app.forms import LoginForm, RegistrationForm
 
 
 @app.route('/')
@@ -33,3 +33,30 @@ def login():
             return redirect(url_for('index'))
     print('ass')
     return render_template('login.html', title='Login', form=form)
+
+@app.route("/logout")
+def logout():
+    name= current_user.name
+    logout_user()
+    current_app.logger.info('%s logged out successfully', name)
+    return redirect(url_for('index'))
+
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('index'))
+
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        #get checkbox inputs and
+        print(form.news_preferences.data)
+        user = User(name=form.name.data, email=form.email.data, password=hashed, news_preferences= "Business,Politics")
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('login'))
+
+    return render_template('register.html', title='Register', form=form)

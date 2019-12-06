@@ -37,10 +37,25 @@
                     <li class="nav-item">
                         <a href={{ url_for('contact') }} class="nav-link">Contact</a>
                     </li>
+                </ul>
+                {% if current_user.is_authenticated %}
+                <ul class="nav navbar-nav ml-auto justify-content-end">
                     <li class="nav-item">
-                        <a href={{ url_for('login') }} class="nav-link">Login</a>
+                        <a href={{ url_for('logout' )}} class="nav-link">Logout</a>
                     </li>
                 </ul>
+
+                {% else %}
+
+                <ul class="nav navbar-nav ml-auto justify-content-end">
+                    <li class="nav-item">
+                        <a href={{ url_for('login' )}} class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href={{ url_for('register' )}} class="nav-link">Register</a>
+                    </li>
+                </ul>
+                {% endif %}
 
             </div>
         </nav>
@@ -48,7 +63,7 @@
     <div>
       {% if current_user.is_authenticated %}
           <div>
-              <h3>{{ current_user.username }}'s session</h3>
+              <h3>{{ current_user.name }}'s session</h3>
           </div>
       {% endif %}
     </div>
