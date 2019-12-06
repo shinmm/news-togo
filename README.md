@@ -20,3 +20,10 @@ Deployment will be done via Heroku https://www.heroku.com/
 
 ### Other Misc stuff
 Package Manager : pipenv https://pipenv.readthedocs.io/en/latest/
+
+### Development
+To install a package 
+`pipenv install <package>`
+
+To run flask server
+`pipenv run flask run`
