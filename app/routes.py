@@ -31,7 +31,6 @@ def login():
         if user is not None and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             return redirect(url_for('index'))
-    print('ass')
     return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
@@ -45,18 +44,17 @@ def logout():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    # if current_user.is_authenticated:
-    #     return redirect(url_for('index'))
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
 
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        #get checkbox inputs and
-        print(form.news_preferences.data)
-        user = User(name=form.name.data, email=form.email.data, password=hashed, news_preferences= "Business,Politics")
+        #join together as string and set
+        news_pref = ",".join(list(form.news_preferences.data))
+        user = User(name=form.name.data, email=form.email.data, password=hashed, news_preferences= news_pref)
         db.session.add(user)
         db.session.commit()
-
         return redirect(url_for('login'))
 
     return render_template('register.html', title='Register', form=form)

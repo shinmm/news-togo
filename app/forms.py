@@ -22,13 +22,13 @@ class MultiCheckboxField(SelectMultipleField):
 
 class RegistrationForm(FlaskForm):
     string_of_categories = ['Business', 'Politics', 'Sports']
-    options = [(index, val) for index, val in enumerate(string_of_categories)]
+    options = [(val, val) for val in string_of_categories]
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=30)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                     validators=[DataRequired(), EqualTo('password')])
-    news_preferences = MultiCheckboxField('News Categories', choices=options)
+    news_preferences = MultiCheckboxField('News Categories',choices=options)
     submit = SubmitField('Sign Up')
 
     def validate_user(self, username):
