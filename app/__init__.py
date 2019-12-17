@@ -38,10 +38,15 @@ db = SQLAlchemy(app)
 #Login
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'users.login'
 
+from app import models
 #create the database
 db.create_all()
 
-from app import routes
-from app.models import *
+# from app import routes
+from app.main.routes import main
+from app.users.routes import users
+
+app.register_blueprint(main)
+app.register_blueprint(users, url_prefix='/users')
