@@ -4,7 +4,16 @@
         <h1>Home Page</h1>
         <h2>{{ current_user.name }}</h2>
     </div>
-{% endblock %}
 {% if current_user.is_authenticated %}
   Hi {{ current_user.name }}!
+{% else %}
+
+<div class="homepage">
+<h2> News to-go </h2>
+<h4>This webapp is meant for people who want to quickly read the news, without staring at an electronic
+device. Choose the news categories you are interested in, and with a click of a button, a pdf document
+containing summaries of the most current news will be generated. Register now to get started!</h4>
+<button type="button" href="llll" class="btn btn-primary btn-lg btn-block">Register Now</button>
+</div>
 {% endif %}
+{% endblock %}

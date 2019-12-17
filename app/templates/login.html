@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+  <div class="login">
     <div>
         <h2>Log In</h2>
     </div>
@@ -10,8 +11,8 @@
         <form action="" method="post">
             {{ form.csrf_token }}
             <div>
-                {{ form.email.label}}
-                {{ form.email }}
+                {{ form.email.label(class="form-control-label")}}
+                {{ form.email(class="form-control form-control-md") }}
                 {% if form.email.errors %}
                 <div>
                     {% for error in form.email.errors %}
@@ -21,12 +22,13 @@
             {% endif %}
             </div>
             <div>
-                {{ form.password.label }}
-                {{ form.password }}
+                {{ form.password.label(class="form-control-label") }}
+                {{ form.password(class="form-control form-control-lg")  }}
             </div>
             <div>
-                {{ form.submit }}
+                {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
             </div>
         </form>
     </div>
+  </div>
 {% endblock %}

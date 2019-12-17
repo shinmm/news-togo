@@ -12,6 +12,7 @@ csp = {
     'default-src': [
         "'self'",
     ],
+    'img-src': '*',
     'script-src': [
         'https://code.jquery.com/',
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/',
