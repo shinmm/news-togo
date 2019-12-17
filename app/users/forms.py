@@ -40,3 +40,9 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Email is taken')
+
+class UpdateForm(FlaskForm):
+    string_of_categories = ['Business', 'Politics', 'Sports']
+    options = [(val, val) for val in string_of_categories]
+    news_preferences = MultiCheckboxField('News Categories',choices=options)
+    submit = SubmitField('Update')
