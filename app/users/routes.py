@@ -3,9 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 from app import db, bcrypt
 from app.models import User
-from app.users.forms import RegistrationForm, LoginForm
-
-from app.models import User
+from app.users.forms import RegistrationForm, LoginForm, UpdateForm
 
 users = Blueprint('users', __name__)
 
@@ -48,3 +46,21 @@ def register():
         return redirect(url_for('users.login'))
 
     return render_template('register.html', title='Register', form=form)
+
+@users.route("/account", methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateForm()
+
+    if form.validate_on_submit():
+        print("worrked")
+        news_pref = ",".join(list(form.news_preferences.data))
+        current_user.news_preferences = news_pref
+
+        db.session.commit()
+
+        return redirect(url_for('users.account'))
+
+    elif request.method == 'GET':
+        pass# form.username.data = current_user.username
+    return render_template('account.html', title='Account', form=form)

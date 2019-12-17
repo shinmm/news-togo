@@ -41,6 +41,9 @@
                 {% if current_user.is_authenticated %}
                 <ul class="nav navbar-nav ml-auto justify-content-end">
                     <li class="nav-item">
+                        <a href={{ url_for('users.account') }} class="nav-link">Account</a>
+                    </li>
+                    <li class="nav-item">
                         <a href={{ url_for('users.logout' )}} class="nav-link">Logout</a>
                     </li>
                 </ul>
